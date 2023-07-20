@@ -101,11 +101,11 @@ function backup(){
   if [ -e backup ]; then
   rm -r backup
   mkdir backup
-  cp $path/bootanimation.zip backup/bootanimation.bak
+  cp /$path/bootanimation.zip backup/bootanimation.bak
   backup
   else
   mkdir backup
-  cp $path/bootanimation.zip backup/bootanimation.bak
+  cp /$path/bootanimation.zip backup/bootanimation.bak
   backup
   fi
   fi
@@ -133,7 +133,8 @@ function module(){
   echo "the same Folder as this Script and"
   echo "that its called Bootanimation.zip"
   echo "[1] Create Module"
-  echo "[2] Back"
+  echo "[2] Remove Module"
+  echo "[3] Back"
   echo " "
   read c
   if [ "$c" -eq 1 ]; then
@@ -160,15 +161,23 @@ function module(){
   module
   fi
   fi
-  
   if [ "$c" -eq 2 ]; then
+  clear
+  echo " "
+  search_dir=/data/adb/modules
+  for entry in "$search_dir"/*
+  do
+  echo "$entry"
+  done
+  echo "Input Module Name to remove"
+  echo " "
+  read modName
+  rm -r /data/adb/modules/$modName
+  sleep 1
+  module
+  fi
+  if [ "$c" -eq 3 ]; then
   main
   fi
-}
-function saveAnim(){
-  clear
-  echo "wip"
-  sleep 2
-  main
 }
 main
